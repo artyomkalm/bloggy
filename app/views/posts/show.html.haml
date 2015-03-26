@@ -12,10 +12,12 @@
         = link_to 'Edit', edit_post_path(@post), :class => "button"        
 %hr/
 %h3 Comments
-- @post.comments.each do |comment|
-  %div
-    %strong= comment.author.username
-    %br/
-    %p= comment.content
-    %p
+- if @post.comments do
+  - @post.comments.each do |comment|
+    %div
+      %strong
+        = comment.author.username
+      %br/
+      %p
+        = comment.content
 = render 'comments/form'
