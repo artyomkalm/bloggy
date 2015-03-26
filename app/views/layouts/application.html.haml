@@ -1,0 +1,38 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %title= content_for?(:title) ? yield(:title) : "foundation-rails"
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "vendor/modernizr"
+    = javascript_include_tag "application", 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    .row
+      .large-12.columns
+        .nav-bar.right
+          %ul.button-group
+            %li
+              %a.button{:href => "#"} Sign In
+            %li
+              %a.button{:href => "#"} Sign Up
+        %h1
+          Bloggy
+          %small Some easy app.
+        %hr/
+    .row
+      .large-12.columns{:role => "content"}
+        = yield
+    %footer.row
+      .large-12.columns
+        %hr/
+        .row
+          .large-6.columns
+            %p © Bloggy
+          .large-6.columns
+            %ul.inline-list.right
+              %li
+                %a{:href => "#"} Sign In
+              %li
+                %a{:href => "#"} Sign Up

@@ -1,0 +1,17 @@
+%h1 Recent Posts
+%p#notice= notice
+= link_to 'New Post', new_post_path, :class => "button"
+- @posts.each do |post|
+  %article
+    %h3= link_to post.title, post
+    %h6
+      Written by #{post.author.name}
+    .row
+      .large-6.columns
+        %p
+          = post.body
+        %ul.button-group
+          = link_to 'Show', post, :class => "button"
+          = link_to 'Edit', edit_post_path(post), :class => "button"
+          = link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, :class => "button"
+  %hr/
