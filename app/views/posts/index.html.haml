@@ -1,13 +1,12 @@
 %h1 Recent Posts
-%p#notice= notice
 = link_to 'New Post', new_post_path, :class => "button"
 - @posts.each do |post|
   %article
     %h3= link_to post.title, post
     %h6
-      Written by #{post.author.name}
+      Written by #{post.author.username}
     .row
-      .large-6.columns
+      .large-10.columns
         %p
           = post.body
         %ul.button-group

@@ -13,16 +13,25 @@
       .large-12.columns
         .nav-bar.right
           %ul.button-group
-            %li
-              %a.button{:href => "#"} Sign In
-            %li
-              %a.button{:href => "#"} Sign Up
+            - if user_signed_in?
+              %li
+                %a.button
+                  Здравствуйте, #{current_user.username}
+              %li
+                = link_to 'Выйти', destroy_user_session_path, :method => :delete, :class => "button"
+            - else
+              %li
+                = link_to 'Войти', new_user_session_path, :class => "button"
+              %li
+                = link_to 'Зарегистрироваться', new_user_registration_path, :class => "button"
         %h1
           Bloggy
           %small Some easy app.
         %hr/
     .row
       .large-12.columns{:role => "content"}
+        %p#notice= notice
+        %p#alert= alert
         = yield
     %footer.row
       .large-12.columns

@@ -1,0 +1,21 @@
+%article
+  %h3
+    = @post.title
+  %h6
+    Written by #{@post.author.username}
+  .row
+    .large-10.columns
+      %p
+        = @post.body
+      %ul.button-group
+        = link_to 'Back', root_path, :class => "button"
+        = link_to 'Edit', edit_post_path(@post), :class => "button"        
+%hr/
+%h3 Comments
+- @post.comments.each do |comment|
+  %div
+    %strong= comment.author.username
+    %br/
+    %p= comment.content
+    %p
+= render 'comments/form'
