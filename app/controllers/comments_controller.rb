@@ -1,10 +1,18 @@
 class CommentsController < ApplicationController
+  before_action :set_post
+
+  def index    
+    @comments = @post.comments.all
+  end
      
   def create
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.create(comment_params)
-    @comment.author = current_user
-    redirect_to post_path(@post)
+    @comment = @post.comments.new(comment_params)
+    @comment.status = "draft"
+    if @comment.save
+      redirect_to post_path(@post), notice: "Comment was successfully created."
+    else
+      render :new
+    end
   end
 
   def edit
@@ -23,7 +31,16 @@ class CommentsController < ApplicationController
     redirect_to comments_url, notice: 'Comment was successfully destroyed.'
   end
 
+  def approve
+    Comment.update_all({approved: "true"}, {id: params[:comment_ids]})
+    redirect_to post_comments_path
+  end
+
   private    
+    def set_post
+      @post = Post.find(params[:id])
+    end
+
     def set_comment
       @comment = Comment.find(params[:id])
     end

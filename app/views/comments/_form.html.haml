@@ -1,8 +1,7 @@
-= simple_form_for([@post, @post.comments.build]) do |f|
+= simple_form_for(@post, Comment.new) do |f|
   = f.error_notification
   .form-inputs
-    = f.input :content
-    = f.input :approved
+    = f.input :content   
     = f.hidden_field :post_id
   .form-actions
     = f.button :submit

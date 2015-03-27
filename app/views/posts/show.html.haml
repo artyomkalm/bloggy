@@ -12,6 +12,6 @@
         = link_to 'Edit', edit_post_path(@post), :class => "button"        
 %hr/
 %h2 Comments
-= render @post.comments
+= render 'comments/comments'
 %h2 Add a comment:
 = render 'comments/form' 

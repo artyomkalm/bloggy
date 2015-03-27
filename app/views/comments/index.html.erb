@@ -1,33 +1,45 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Comments</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th>Post</th>
-      <th>Author</th>
-      <th>Approved</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @comments.each do |comment| %>
-      <tr>
-        <td><%= comment.content %></td>
-        <td><%= comment.post_id %></td>
-        <td><%= comment.author_id %></td>
-        <td><%= comment.approved %></td>
-        <td><%= link_to 'Show', comment %></td>
-        <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-        <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="row">
+  <div class="large-8 large-centered columns">
+    <h5><small>Comments for the post:</small> <%= @post.title %></h5>
+    <hr>
+    <h5>Moderation table</h5>
+    <%= form_tag approve_post_comments_path, method: :put do %>
+      <table>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Comment</th>
+          <th>Status</th>
+        </tr>
+        <% @post.comments.draft.each do |comment| %>
+        <tr>
+          <td><%= check_box_tag "comment_ids[]", comment.id %></td>
+          <td><%= comment.creator %> </td>
+          <td><%= comment.body %></td>
+          <td><%= comment.status%></td>
+        </tr>
+        <% end %>
+      </table>
+      <%= submit_tag "Approve Comments"%>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Comment', new_comment_path %>
+    <h5>All Approved Comments</h5>
+    <table>
+      <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>Comment</th>
+        <th>Status</th>
+      </tr>
+      <% @post.comments.approved.each do |comment| %>
+      <tr>
+        <td><%= comment.id %></td>
+        <td><%= comment.creator %></td>
+        <td><%= comment.body %></td>
+        <td><%= comment.status%></td>
+      </tr>
+      <% end %>
+    </table>
+    <hr>
+    

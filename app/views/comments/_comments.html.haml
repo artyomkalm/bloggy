@@ -1,0 +1,13 @@
+.large-6.large-centered.columns
+  = link_to "Moderate #{pluralize @comments.draft.size, ('comment')}", post_comments_path(@post), class: "button alert small"
+  %br/
+%br/
+.large-6.large-centered.columns.panel
+  %h4 Comments
+  - @comments.approved.each do |comment|
+    %p
+      = comment.author.username
+      commented #{human_date(comment.created_at)}
+    %p
+      = simple_format(comment.content)
+    %hr/

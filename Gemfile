@@ -13,6 +13,7 @@ gem 'foundation-rails'
 gem 'simple_form'
 gem 'haml'
 gem 'devise'
+gem 'human_date'
 
 group :development, :test do
   gem 'byebug'

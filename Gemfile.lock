@@ -76,6 +76,7 @@ GEM
     haml (4.0.6)
       tilt
     hike (1.2.3)
+    human_date (0.0.3)
     i18n (0.7.0)
     jbuilder (2.2.12)
       activesupport (>= 3.0.0, < 5)
@@ -202,6 +203,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.0)
   foundation-rails
   haml
+  human_date
   jbuilder (~> 2.0)
   jquery-rails
   rails (= 4.2.0)
