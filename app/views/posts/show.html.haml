@@ -11,13 +11,7 @@
         = link_to 'Back', root_path, :class => "button"
         = link_to 'Edit', edit_post_path(@post), :class => "button"        
 %hr/
-%h3 Comments
-- if @post.comments do
-  - @post.comments.each do |comment|
-    %div
-      %strong
-        = comment.author.username
-      %br/
-      %p
-        = comment.content
-= render 'comments/form'
+%h2 Comments
+= render @post.comments
+%h2 Add a comment:
+= render 'comments/form' 
