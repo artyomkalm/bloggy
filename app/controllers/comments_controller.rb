@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
     
   def update
     if @comment.update(comment_params)
-      redirect_to @comment, notice: 'Comment was successfully updated.'      
+      redirect_to post_path(@post), notice: 'Comment was successfully updated.'      
     else
       render :edit        
     end

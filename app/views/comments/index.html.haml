@@ -1,0 +1,37 @@
+%p#notice= notice
+.row
+  .large-8.large-centered.columns
+    %h5
+      %small Comments for the post:
+      = @post.title
+    %hr/
+    %h5 Moderation table
+    = form_tag approve_post_comments_path, method: :put do
+      %table
+        %tr
+          %th
+          %th Name
+          %th Comment
+          %th Status
+        - @post.comments.draft.each do |comment|
+          %tr
+            %td= check_box_tag "comment_ids[]", comment.id
+            %td= comment.author.username
+            %td= comment.content
+            %td= comment.approved
+      = submit_tag "Approve Comments"
+    %h5 All Approved Comments
+    %table
+      %tr
+        %th id
+        %th Name
+        %th Comment
+        %th Status
+      - @post.comments.approved.each do |comment|
+        %tr
+          %td= comment.id
+          %td= comment.author.username
+          %td= comment.content
+          %td= comment.approved
+    %hr/
+    = link_to "Back", post_path(@post), class: "button disabled"
