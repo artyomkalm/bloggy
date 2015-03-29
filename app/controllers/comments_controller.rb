@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_post
+  before_action :set_comment, only: [:edit, :update]
 
   def index    
     @comments = @post.comments.all
@@ -7,7 +8,7 @@ class CommentsController < ApplicationController
      
   def create
     @comment = @post.comments.new(comment_params)
-    @comment.status = "draft"
+    @comment.author = current_user    
     if @comment.save
       redirect_to post_path(@post), notice: "Comment was successfully created."
     else
@@ -16,6 +17,7 @@ class CommentsController < ApplicationController
   end
 
   def edit
+
   end
     
   def update
@@ -32,13 +34,16 @@ class CommentsController < ApplicationController
   end
 
   def approve
-    Comment.update_all({approved: "true"}, {id: params[:comment_ids]})
+    @comments = Comment.find(params[:comment_ids])
+    @comments.each do |comment|
+      comment.update(approved: "true")
+    end
     redirect_to post_comments_path
   end
-
+  
   private    
     def set_post
-      @post = Post.find(params[:id])
+      @post = Post.find(params[:post_id])
     end
 
     def set_comment

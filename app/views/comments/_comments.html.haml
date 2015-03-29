@@ -1,7 +1,20 @@
-.large-6.large-centered.columns
-  = link_to "Moderate #{pluralize @comments.draft.size, ('comment')}", post_comments_path(@post), class: "button alert small"
-  %br/
-%br/
+- if @post.author == current_user
+  .large-6.large-centered.columns
+    = link_to "Moderate #{pluralize @comments.draft.size, ('comment')}", post_comments_path(@post), class: "button alert small"
+    %br/  
+- else
+  .large-6.large-centered.columns.panel
+    %h4 
+      My unsubmitted Comments
+      - @comments.draft.where(:author => current_user).each do |comment|
+        %p
+          = comment.author.username
+          commented #{human_date(comment.created_at)}
+        %p
+          = simple_format(comment.content)
+        = link_to "Edit", edit_post_comment_path(params[:comment_id]), class: "button small"
+        %hr/
+%br/  
 .large-6.large-centered.columns.panel
   %h4 Comments
   - @comments.approved.each do |comment|

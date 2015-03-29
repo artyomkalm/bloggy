@@ -16,9 +16,9 @@
         <% @post.comments.draft.each do |comment| %>
         <tr>
           <td><%= check_box_tag "comment_ids[]", comment.id %></td>
-          <td><%= comment.creator %> </td>
-          <td><%= comment.body %></td>
-          <td><%= comment.status%></td>
+          <td><%= comment.author.username %> </td>
+          <td><%= comment.content %></td>
+          <td><%= comment.approved %></td>
         </tr>
         <% end %>
       </table>
@@ -35,9 +35,9 @@
       <% @post.comments.approved.each do |comment| %>
       <tr>
         <td><%= comment.id %></td>
-        <td><%= comment.creator %></td>
-        <td><%= comment.body %></td>
-        <td><%= comment.status%></td>
+        <td><%= comment.author.username %></td>
+        <td><%= comment.content %></td>
+        <td><%= comment.approved %></td>
       </tr>
       <% end %>
     </table>
